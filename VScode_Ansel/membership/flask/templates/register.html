@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REGISTER</title>
+  <link rel="stylesheet" href="../stylesheets/all.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../js/register.js"></script>
+
+</head>
+
+<body>
+  <!--圖片放在header-->
+  <header style="height: 220px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+    <div>
+      <img src=" ../img/breakfast.svg" class="center" alt="home" style="height: 120px; width: 120px;" />
+    </div>
+  </header>
+  <!--大標題-->
+  <div style="display: flex; justify-content: center; align-items: center; height: 90px;">
+    <div style="text-align: center; font-size: 36px; font-weight: bold;">Register</div>
+  </div>
+  <!--input-->
+  <form id='registerform'>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="input-group mb-2" style="width: 300px;">
+        <input id="Username" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" placeholder="Username : 8~16 string">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="input-group mb-2" style="width: 300px;">
+        <input id="Password" type="password" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" placeholder="Password">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="input-group mb-2" style="width: 300px;">
+        <input id="Name" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" placeholder="Name">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="input-group mb-2" style="width: 300px;">
+        <input id="Phone" type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" placeholder="Phone">
+      </div>
+    </div>
+    <!--input end-->
+    <div class="mb-2 d-grid gap-2 col-6 mx-auto" style="width: 300px;">
+      <button class="btn btn-primary" type='submit'>SIGN UP!</button>
+    </div>
+  </form>
+
+  <footer>
+    <div style="display: flex; justify-content: center; align-items: center;font-size: 12px;">
+      Aleady have an account?&nbsp;<a href="/login"> Sign in</a>
+    </div>
+  </footer>
+</body>
+
+</html>

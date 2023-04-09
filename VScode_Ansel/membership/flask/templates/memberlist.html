@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Memberlist</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="../stylesheets/all.css">
+  <script src="../js/memberlist.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/memberlist">
+        <img src=" ../img/breakfast.svg" alt="" width="80" height="50">
+        &nbsp Memberlist
+      </a>
+
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end">
+      <form class="container-fluid justify-content-start ">
+        <ul class="navbar-nav">
+          <li class="nav-item ">
+            <a class="btn btn-sm btn-outline-secondary text-nowrap" id="RefreshData" role="button">Refresh Data</a>
+          </li>
+          <li class="nav-item ">
+            <a class="btn btn-sm btn-outline-secondary text-nowrap" href="/register" role="button">Create Account</a>
+          </li>
+          <li class="nav-item ">
+            <a class="btn btn-sm btn-outline-secondary text-nowrap" id="DeleteAccount" role="button">Delete Account</a>
+          </li>
+          <li class="nav-item ">
+            <a class="btn btn-sm btn-outline-secondary text-nowrap" id="SignOut" href="{{ url_for('logout') }}"
+              role="button">Sign
+              Out</a>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </nav>
+
+  <br>
+  <div style="width: 960px; text-align:center; margin: 0 auto;" id="pagination">
+    <table id="memberList" class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th> <!-- 新增列 -->
+          <th scope="col">index</th>
+          <th scope="col">帳號</th>
+          <th scope="col">密碼</th>
+          <th scope="col">姓名</th>
+          <th scope="col">電話</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+
+</html>
