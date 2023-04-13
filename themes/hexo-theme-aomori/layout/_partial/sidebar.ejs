@@ -1,0 +1,15 @@
+<% if (config.aomori_search_algolia){ %>
+  <%- partial('_partial/search') %>
+    <% } %>
+
+      <div class="widget" id="widget">
+        <% (config.aomori_widgets || theme.aomori_widgets).forEach(function(widget){ %>
+          <%- partial('_widget/' + widget) %>
+            <% }) %>
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
