@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[Docker] 練習筆記 | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;CLI-登入&#34;&gt;&lt;a href=&#34;#CLI-登入&#34; class=&#34;headerlink&#34; title=&#34;CLI 登入&#34;&gt;&lt;/a&gt;CLI 登入&lt;/h1&gt;&lt;p&gt;先用網頁登入docker hub,到Security 新增Tocken&lt;br&gt;&lt;strong&gt;要先記錄下密碼&lt;/strong&gt;&lt;br&gt;用取得的指令登入 ex: docker login -u anselchen&lt;/p&gt;
+&lt;p&gt;若失敗&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service docker stop
+rm ~/.docker/config.json
+service docker start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try again!&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[Docker] 練習筆記 | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;h1 id=&#34;CLI-登入&#34;&gt;&lt;a href=&#34;#CLI-登入&#34; class=&#34;headerlink&#34; title=&#34;CLI 登入&#34;&gt;&lt;/a&gt;CLI 登入&lt;/h1&gt;&lt;p&gt;先用網頁登入docker hub,到Security 新增Tocken&lt;br&gt;&lt;strong&gt;要先記錄下密碼&lt;/strong&gt;&lt;br&gt;用取得的指令登入 ex: docker login -u anselchen&lt;/p&gt;
+&lt;p&gt;若失敗&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service docker stop
+rm ~/.docker/config.json
+service docker start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try again!&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/04/12/docker-memo/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;h1 id=&#34;CLI-登入&#34;&gt;&lt;a href=&#34;#CLI-登入&#34; class=&#34;headerlink&#34; title=&#34;CLI 登入&#34;&gt;&lt;/a&gt;CLI 登入&lt;/h1&gt;&lt;p&gt;先用網頁登入docker hub,到Security 新增Tocken&lt;br&gt;&lt;strong&gt;要先記錄下密碼&lt;/strong&gt;&lt;br&gt;用取得的指令登入 ex: docker login -u anselchen&lt;/p&gt;
+&lt;p&gt;若失敗&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service docker stop
+rm ~/.docker/config.json
+service docker start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try again!&lt;/p&gt;" />
+    <meta name="twitter:title" content="[Docker] 練習筆記 | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;h1 id=&#34;CLI-登入&#34;&gt;&lt;a href=&#34;#CLI-登入&#34; class=&#34;headerlink&#34; title=&#34;CLI 登入&#34;&gt;&lt;/a&gt;CLI 登入&lt;/h1&gt;&lt;p&gt;先用網頁登入docker hub,到Security 新增Tocken&lt;br&gt;&lt;strong&gt;要先記錄下密碼&lt;/strong&gt;&lt;br&gt;用取得的指令登入 ex: docker login -u anselchen&lt;/p&gt;
+&lt;p&gt;若失敗&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service docker stop
+rm ~/.docker/config.json
+service docker start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try again!&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;h1 id=&#34;CLI-登入&#34;&gt;&lt;a href=&#34;#CLI-登入&#34; class=&#34;headerlink&#34; title=&#34;CLI 登入&#34;&gt;&lt;/a&gt;CLI 登入&lt;/h1&gt;&lt;p&gt;先用網頁登入docker hub,到Security 新增Tocken&lt;br&gt;&lt;strong&gt;要先記錄下密碼&lt;/strong&gt;&lt;br&gt;用取得的指令登入 ex: docker login -u anselchen&lt;/p&gt;
+&lt;p&gt;若失敗&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;service docker stop
+rm ~/.docker/config.json
+service docker start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Try again!&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/04/12/docker-memo/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[Docker] 練習筆記 | Ansel&#39;s Blog",
+            "datePublished": "2023-04-12T09:22:40.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/04/12/docker-memo/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clhkppfqb0002uxrhev9tgqak" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [Docker] 練習筆記
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-04-12T09:22:40.000Z" itemprop="datePublished">2023-04-12</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="CLI-登入"><a href="#CLI-登入" class="headerlink" title="CLI 登入"></a>CLI 登入</h1><p>先用網頁登入docker hub,到Security 新增Tocken<br><strong>要先記錄下密碼</strong><br>用取得的指令登入 ex: docker login -u anselchen</p>
+<p>若失敗</p>
+<pre><code>service docker stop
+rm ~/.docker/config.json
+service docker start
+</code></pre>
+<p>Try again!</p>
+<span id="more"></span>
+
+<h1 id="建立Image"><a href="#建立Image" class="headerlink" title="建立Image"></a>建立Image</h1><p>寫好Dockerfile</p>
+<pre><code># 建立img
+docker build -t mem_api .
+# 啟動 前面是container name 後面是要啟動的image
+docker run -p 8000:8000 --name memberapi mem_api
+</code></pre>
+<h1 id="Push-到-Hub"><a href="#Push-到-Hub" class="headerlink" title="Push 到 Hub"></a>Push 到 Hub</h1><ol>
+<li>先建立一個 repository</li>
+<li>製作Tag</li>
+</ol>
+<pre><code># docker images 查id, &lt;tag&gt;輸入備註
+docker tag &lt;image_id&gt; &lt;docker_hub_username&gt;/&lt;repository_name&gt;:&lt;tag&gt;
+</code></pre>
+<ol start="3">
+<li></li>
+</ol>
+<pre><code>docker push &lt;docker_hub_username&gt;/&lt;repository_name&gt;:&lt;tag&gt;
+</code></pre>
+<ol start="4">
+<li></li>
+</ol>
+<pre><code>docker pull &lt;docker_hub_username&gt;/&lt;repository_name&gt;:&lt;tag&gt;
+</code></pre>
+<p>ref</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191727#:~:text=%E5%A6%82%E6%9E%9C%E8%A6%81%E9%80%B2%E5%85%A5%20container%20%E7%9C%8B%E6%9C%89%E5%93%AA%E4%BA%9B%E8%B3%87%E6%96%99%E5%A4%BE%E3%80%81%E6%AA%94%E6%A1%88%E6%88%96%E6%98%AF%E8%A6%81%E4%BF%AE%E6%94%B9%E6%AA%94%E6%A1%88%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%BB%A5%E4%B8%8B%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%9A%20%24%20docker%20exec%20-it,nginx%20%2Fbin%2Fbash%20nginx%20%E7%82%BA%20Container%20Name%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%20Container%20ID">https://ithelp.ithome.com.tw/articles/10191727#:~:text=%E5%A6%82%E6%9E%9C%E8%A6%81%E9%80%B2%E5%85%A5%20container%20%E7%9C%8B%E6%9C%89%E5%93%AA%E4%BA%9B%E8%B3%87%E6%96%99%E5%A4%BE%E3%80%81%E6%AA%94%E6%A1%88%E6%88%96%E6%98%AF%E8%A6%81%E4%BF%AE%E6%94%B9%E6%AA%94%E6%A1%88%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%BB%A5%E4%B8%8B%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%9A%20%24%20docker%20exec%20-it,nginx%20%2Fbin%2Fbash%20nginx%20%E7%82%BA%20Container%20Name%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%20Container%20ID</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.gtwang.org/linux/docker-commands-and-container-management-tutorial/">https://blog.gtwang.org/linux/docker-commands-and-container-management-tutorial/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-command-manual.html">https://www.runoob.com/docker/docker-command-manual.html</a></p>
+</li>
+</ol>
+<h1 id="WSL2-Docker-安裝"><a href="#WSL2-Docker-安裝" class="headerlink" title="WSL2 Docker 安裝"></a>WSL2 Docker 安裝</h1><p>官網: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/windows/wsl/install-manual">https://learn.microsoft.com/zh-tw/windows/wsl/install-manual</a></p>
+<ol>
+<li>系統管理員 模式中開啟 PowerShell</li>
+</ol>
+<pre><code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --install
+</code></pre>
+<ol start="2">
+<li><p>手動下載 <a target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">WSL2 Linux 核心更新套件 (適用於 x64 電腦)</a>,後安裝</p>
+</li>
+<li><p>將 WSL 2 設定為預設版本</p>
+</li>
+</ol>
+<pre><code>wsl --set-default-version 2
+</code></pre>
+<ol start="4">
+<li>手動安裝想要的linux版本 請至<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/windows/wsl/install-manual">官網</a>,下半部選擇</li>
+</ol>
+<p>或是</p>
+<pre><code>Invoke-WebRequest -Uri https://aka.ms/wslubuntu2004 -OutFile Ubuntu.appx -UseBasicParsing
+
+Add-AppxPackage .\app_name.appx
+</code></pre>
+<ol start="5">
+<li>裝好WSL2後，打開WSL2</li>
+</ol>
+<pre><code>wsl.exe -l -v #查linux版本
+wsl.exe --set-version Ubuntu-20.04 2 #切換至V2
+wsl.exe --set-default-version 2
+wsl --set-default Ubuntu-20.04
+</code></pre>
+<p>docker後台也要設定WSL2</p>
+<ol start="6">
+<li>在WSL terminal</li>
+</ol>
+<pre><code>wsl
+code . #會打開VScode 左下角可以確認是否為WSL環境
+</code></pre>
+<img src="./vscode_wsl2.jpg" alt="ubuntu2004" style="display:block; margin:auto;"/>
+
+<ol start="7">
+<li>更換Systemd(看個人習慣)</li>
+</ol>
+<pre><code>git clone https://github.com/DamionGans/ubuntu-wsl2-systemd-script.git
+cd ubuntu-wsl2-systemd-script
+bash ubuntu-wsl2-systemd-script.sh
+</code></pre>
+<p>重啟WSL</p>
+<pre><code>ps aux #查看是否成功讀取
+</code></pre>
+<p>ref: <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10255920">https://ithelp.ithome.com.tw/articles/10255920</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/2023/04/07/membersys/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[Docker] 練習筆記 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F04%2F12%2Fdocker-memo%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[Docker] 練習筆記 - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F04%2F12%2Fdocker-memo%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[Docker] 練習筆記 - Ansel's Blog&url=http://example.com/2023/04/12/docker-memo/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
