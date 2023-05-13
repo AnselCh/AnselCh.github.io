@@ -102,7 +102,7 @@ theme: hexo-theme-aomori
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/AnselCh/anselch.github.io.git
+  repo: git@github.com:AnselCh/anselch.github.io.git
   branch: master
 
 # aomori_customized settings
