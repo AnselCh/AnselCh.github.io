@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;p&gt;這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，&lt;br&gt;主要路由會有 “&amp;#x2F;index”, “&amp;#x2F;login”, “&amp;#x2F;register”, “&amp;#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，&lt;br&gt;其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&amp;#x2F;memberlist”就需要管理員身分才能進入，&lt;br&gt;否則便會返回登入頁面要求登入。&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;p&gt;這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，&lt;br&gt;主要路由會有 “&amp;#x2F;index”, “&amp;#x2F;login”, “&amp;#x2F;register”, “&amp;#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，&lt;br&gt;其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&amp;#x2F;memberlist”就需要管理員身分才能進入，&lt;br&gt;否則便會返回登入頁面要求登入。&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/04/07/membersys/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;p&gt;這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，&lt;br&gt;主要路由會有 “&amp;#x2F;index”, “&amp;#x2F;login”, “&amp;#x2F;register”, “&amp;#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，&lt;br&gt;其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&amp;#x2F;memberlist”就需要管理員身分才能進入，&lt;br&gt;否則便會返回登入頁面要求登入。&lt;/p&gt;" />
+    <meta name="twitter:title" content="[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;p&gt;這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，&lt;br&gt;主要路由會有 “&amp;#x2F;index”, “&amp;#x2F;login”, “&amp;#x2F;register”, “&amp;#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，&lt;br&gt;其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&amp;#x2F;memberlist”就需要管理員身分才能進入，&lt;br&gt;否則便會返回登入頁面要求登入。&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;p&gt;這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，&lt;br&gt;主要路由會有 “&amp;#x2F;index”, “&amp;#x2F;login”, “&amp;#x2F;register”, “&amp;#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，&lt;br&gt;其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&amp;#x2F;memberlist”就需要管理員身分才能進入，&lt;br&gt;否則便會返回登入頁面要求登入。&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/04/07/membersys/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  | Ansel&#39;s Blog",
+            "datePublished": "2023-04-07T05:50:29.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/04/07/membersys/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clhlmltfu000wmbrhgt856fy4" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-04-07T05:50:29.000Z" itemprop="datePublished">2023-04-07</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，<br>主要路由會有 “&#x2F;index”, “&#x2F;login”, “&#x2F;register”, “&#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，<br>其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&#x2F;memberlist”就需要管理員身分才能進入，<br>否則便會返回登入頁面要求登入。</p>
+<span id="more"></span>
+<p>這次主要會分成兩個區塊，啟動時會需要開flask跟fastapi的server，flask負責整個網頁你看的到的架構，包含裡面包的html,js,css等等，<br>再透過串接fastapi獲取資料後渲染到前端，這次登入方法是採用session的方式，之後會再使用JWT的方式進行登入的驗證。<br>至於網頁html,CSS等等這邊不會做講解，這次全部都是使用Bootstrap建置的，有興趣的人可以參考參考。</p>
+<hr>
+<h1 id="程式架構"><a href="#程式架構" class="headerlink" title="程式架構"></a>程式架構</h1><img src="./程式架構.jpg"  alt="程式架構" />
+
+<p>app.py 是啟動網頁的主程式，裡面包含了每個網頁的路由跟資料庫的連接。<br>templates 裡面則是放了每個路由所需要使用到的html頁面。<br>membership 是此次專案的虛擬環境可以不用裡他。<br>剩下的資料夾就都是存放網站資源的地方，像是CSS,js腳本。</p>
+<hr>
+<h1 id="註冊"><a href="#註冊" class="headerlink" title="註冊"></a>註冊</h1><p>我會依照一般使用者的登入邏輯先run過一次後面再附上程式碼，<br>“<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/register">http://127.0.0.1:5000/register</a>“:</p>
+<img src="./register.jpg"  alt="註冊頁面" />
+
+<p>這個頁面會串接上一篇文章製作的api將資料寫入到DB，註冊完成後上面會跳出’Register success!’並轉跳至”&#x2F;login”登入頁面<br>以下附上串接api的js</p>
+<pre><code>$(document).ready(function () &#123;
+  $(&#39;#registerform&#39;).submit(function (event) &#123;
+    // 防止提交默認
+    event.preventDefault();
+
+    // 獲取表單數據
+    var account = $(&#39;#Username&#39;).val();
+    var password = $(&#39;#Password&#39;).val();
+    var name = $(&#39;#Name&#39;).val();
+    var contactNumber = $(&#39;#Phone&#39;).val();
+
+    // POST Requests with JSON
+    $.ajax(&#123;
+      url: &#39;http://127.0.0.1:8000/membership/&#39;,
+      type: &#39;POST&#39;,
+      contentType: &#39;application/json&#39;,
+      data: JSON.stringify(&#123;
+        account: account,
+        password: password,
+        name: name,
+        phone: contactNumber
+      &#125;),
+
+      success: function (response) &#123;
+        console.log(response);
+        alert(&#39;Register success!&#39;);
+        // 跳轉到/signin
+        window.location.href = &quot;/login&quot;;
+      &#125;,
+      error: function (xhr, status, error) &#123;
+        if (xhr.status === 400) &#123;
+          alert(&#39;Account already exist&#39;);
+        &#125;
+        console.error(error);
+        // 清空欄位
+        $(&#39;#Username&#39;).val(&#39;&#39;);
+        $(&#39;#Password&#39;).val(&#39;&#39;);
+        $(&#39;#Name&#39;).val(&#39;&#39;);
+        $(&#39;#Phone&#39;).val(&#39;&#39;);
+      &#125;
+    &#125;);
+  &#125;);
+&#125;);
+</code></pre>
+<hr>
+<h1 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h1><p>“<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/login">http://127.0.0.1:5000/login</a>“:</p>
+<img src="./signin.jpg"  alt="signin" />
+
+<p>後台會串連接DB進行驗證，若會員存在就會發出一個session給瀏覽器，瀏覽器便會帶著發出的帳號轉跳至 “<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/index">http://127.0.0.1:5000/index</a>“<br>或者管理員身分會轉跳至”<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/memberlist">http://127.0.0.1:5000/memberlist</a>“</p>
+<pre><code>@application.route(&quot;/login&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])
+def login():
+    if request.method == &quot;POST&quot;:
+        account = request.form.get(&quot;Username&quot;)
+        password = request.form.get(&quot;Password&quot;)
+
+        if (account == admin[&quot;account&quot;] and password == admin[&quot;password&quot;]):
+            response = make_response(redirect(url_for(&quot;memberlist&quot;)))
+            session[&#39;username&#39;] = admin[&quot;account&quot;]
+            return response
+
+        db = client.membership
+        collection = db.member_data
+        member = collection.find_one(
+            &#123;&quot;account&quot;: account, &quot;password&quot;: password&#125;)
+        if member:
+            response = make_response(redirect(url_for(&quot;index&quot;)))
+            session[&#39;username&#39;] = account
+            return response
+        else:
+            # 失敗跳出錯誤訊息
+            error_msg = (&quot;Invalid account or password&quot;)
+            return render_template(&quot;login.html&quot;, error_msg=error_msg)
+    else:
+        # GET
+        return render_template(&quot;login.html&quot;)
+</code></pre>
+<p>並且在”&#x2F;index”右上會顯示現在的使用者帳號(因為剛剛session中賦予了後端使用者訊息)，按下右上的”Sign Out”會刪除session並導回”&#x2F;login”。<br><img src="./index.jpg"  alt="index" /></p>
+<p>以下是”Sign Out”後端連接的路由</p>
+<pre><code>@application.route(&quot;/logout&quot;)
+def logout():
+    session.clear()  # 清除 session
+    return redirect(url_for(&#39;login&#39;))
+</code></pre>
+<p>清除session後就必須重新登入</p>
+<hr>
+<h1 id="會員清單"><a href="#會員清單" class="headerlink" title="會員清單"></a>會員清單</h1><p>這邊因為我只設定一組管理員帳號所以就直接將管理員放在flask的檔案中，較好的做法是在DB中建立一個管理員資料庫，<br>登入頁面只要使用管理員帳號登入，路由會直接導到 “<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/memberlist">http://127.0.0.1:5000/memberlist</a>“ 而不是 “&#x2F;index”，<br><img src="./memberlist.jpg"  alt="memberlist" /></p>
+<p>在管理者頁面中右上角的”Refresh Data”背後串接了取的DB的api，每次按一次便會刷新頁面重新取得會員資料，<br>這邊比較麻煩的是在更新資料時，必須要寫一段javascript來更新畫面，一開始開發顯示會員資料時是一頁到底，後來為了避免資料過於龐大所以便想要最多顯示10筆資料，並且新增換頁的按鍵。<br>後來靠chatGPT幫忙，並且告著自己做些調整，沒有前端經驗的我也能成功寫出想要的畫面!<br>“Create Account”則會直接將路由導引至 “<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/register">http://127.0.0.1:5000/register</a>“ 創建帳號，<br>“Delete Account”可以直接刪除選取的帳號，背後是直接串接DELETE的api<br>“Sign Out”跟一般會員頁面一樣，會刪除session。</p>
+<p>這邊js稍微比較多，內容是每個按鍵所串接的api</p>
+<pre><code>$(document).ready(function () &#123;
+  $(&#39;#registerform&#39;).submit(function (event) &#123;
+    // 防止提交默認
+    event.preventDefault();
+
+    // 獲取表單數據
+    var account = $(&#39;#Username&#39;).val();
+    var password = $(&#39;#Password&#39;).val();
+    var name = $(&#39;#Name&#39;).val();
+    var contactNumber = $(&#39;#Phone&#39;).val();
+
+    // POST Requests with JSON
+    $.ajax(&#123;
+      url: &#39;http://127.0.0.1:8000/membership/&#39;,
+      type: &#39;POST&#39;,
+      contentType: &#39;application/json&#39;,
+      data: JSON.stringify(&#123;
+        account: account,
+        password: password,
+        name: name,
+        phone: contactNumber
+      &#125;),
+
+      success: function (response) &#123;
+        console.log(response);
+        alert(&#39;Register success!&#39;);
+        // 跳轉到/signin
+        window.location.href = &quot;/login&quot;;
+      &#125;,
+      error: function (xhr, status, error) &#123;
+        if (xhr.status === 400) &#123;
+          alert(&#39;Account already exist&#39;);
+        &#125;
+        console.error(error);
+        // 清空欄位
+        $(&#39;#Username&#39;).val(&#39;&#39;);
+        $(&#39;#Password&#39;).val(&#39;&#39;);
+        $(&#39;#Name&#39;).val(&#39;&#39;);
+        $(&#39;#Phone&#39;).val(&#39;&#39;);
+      &#125;
+    &#125;);
+  &#125;);
+&#125;);
+
+</code></pre>
+<hr>
+<h1 id="驗證問題"><a href="#驗證問題" class="headerlink" title="驗證問題"></a>驗證問題</h1><p>這時候就會想到如果使用者直接輸入網址是不是可以繞過登入的步驟進到會員頁面，<br>所以這邊在”&#x2F;index”,”&#x2F;memberlist”都有設置session的驗證，若使用者直接輸入網址且沒有帶上session便會被導回”&#x2F;login”，且跳出”請先登入”，<br>若是一般帳號登入後想直接進入”&#x2F;memberlist”頁面，則會跳出”你並非管理員”，並導回”&#x2F;index”</p>
+<img src="./plzsignin.jpg"  alt="plzsignin" />
+
+
+<pre><code>@application.route(&quot;/index&quot;)
+def index():
+    if &#39;username&#39; not in session:
+        flash(&quot;請先登入&quot;)
+        return redirect(url_for(&#39;login&#39;))
+    return render_template(&quot;index.html&quot;)
+</code></pre>
+<img src="./memberlistSign.jpg"  alt="要求先用管理員身分" />
+<img src="./notadmin.jpg"  alt="非管理員身分" />
+
+
+<pre><code>@application.route(&quot;/memberlist&quot;)
+def memberlist():
+    if &#39;username&#39; not in session:
+        flash(&quot;請先登入&quot;)
+        return redirect(url_for(&#39;login&#39;))
+    elif session[&#39;username&#39;] != admin[&#39;account&#39;]:
+        flash(&quot;你並非管理員&quot;)
+        return redirect(url_for(&#39;index&#39;))
+    # 查詢所有會員頁面
+    return render_template(&quot;memberlist.html&quot;)
+</code></pre>
+<hr>
+<p>最後附上GitHub連結:<a target="_blank" rel="noopener" href="https://github.com/AnselCh/Flask_MemberSystem">https://github.com/AnselCh/Flask_MemberSystem</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/04/12/docker-memo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">次の記事</div>
+      <div class="article-nav-title">
+        
+          [Docker] 練習筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/15/fastapi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">前の記事</div>
+      <div class="article-nav-title">[Fastapi] 快速製作一個會員後台API,並用ajax串接</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">シェア</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F04%2F07%2Fmembersys%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F04%2F07%2Fmembersys%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫  - Ansel's Blog&url=http://example.com/2023/04/07/membersys/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[Fastapi] 快速製作一個會員後台API,並用ajax串接 | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;p&gt;今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!&lt;/p&gt;
+&lt;p&gt;這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!&lt;/p&gt;
+&lt;p&gt;並在最後寫一個簡單的註冊頁面測試API。&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[Fastapi] 快速製作一個會員後台API,並用ajax串接 | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;p&gt;今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!&lt;/p&gt;
+&lt;p&gt;這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!&lt;/p&gt;
+&lt;p&gt;並在最後寫一個簡單的註冊頁面測試API。&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/03/15/fastapi/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;p&gt;今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!&lt;/p&gt;
+&lt;p&gt;這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!&lt;/p&gt;
+&lt;p&gt;並在最後寫一個簡單的註冊頁面測試API。&lt;/p&gt;" />
+    <meta name="twitter:title" content="[Fastapi] 快速製作一個會員後台API,並用ajax串接 | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;p&gt;今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!&lt;/p&gt;
+&lt;p&gt;這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!&lt;/p&gt;
+&lt;p&gt;並在最後寫一個簡單的註冊頁面測試API。&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;p&gt;今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!&lt;/p&gt;
+&lt;p&gt;這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!&lt;/p&gt;
+&lt;p&gt;並在最後寫一個簡單的註冊頁面測試API。&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/03/15/fastapi/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[Fastapi] 快速製作一個會員後台API,並用ajax串接 | Ansel&#39;s Blog",
+            "datePublished": "2023-03-15T02:51:56.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/03/15/fastapi/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clhlmltfq0005mbrhejj2fo4d" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [Fastapi] 快速製作一個會員後台API,並用ajax串接
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-03-15T02:51:56.000Z" itemprop="datePublished">2023-03-15</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/repository/">repository</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <meta name="referrer" content="no-referrer" />
+
+<p>今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!</p>
+<p>這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!</p>
+<p>並在最後寫一個簡單的註冊頁面測試API。</p>
+<span id="more"></span>
+
+<hr>
+<h1 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h1><pre><code>pip install fastapi[all]==0.75.0
+pip install pydantic==1.9
+pip install pymongo[srv]==3.11.0
+pip install python-dotenv==0.19.2
+pip install pytest==7.0.1
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://github.com/tiangolo/fastapi">fastapi</a>是一個開源的api框架，可以去官網看，且swagger UI支援，不需要加裝第三方套件測試<br>pydantic 是資料處理的套件<br><a href="pymongo">pymongo</a> 是MongoDB出的py連接套件<br>並準備一個MongoDB帳號，若要用本地端的DB就不用準備，這邊附上<a target="_blank" rel="noopener" href="https://www.mongodb.com/docs/atlas/tutorial/connect-to-your-cluster/?_ga=2.105960192.2035563352.1678696693-1842266058.1678696693#connect-to-your-atlas-cluster">官方教學</a></p>
+<h2 id="資料結構"><a href="#資料結構" class="headerlink" title="資料結構"></a>資料結構</h2><p>–main.py<br>–models.py<br>–routes.py<br>–.env</p>
+<hr>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><ol>
+<li>先設置好.env，連接DB用，ATLAS_URI照著上面官方教學就可以拿到了</li>
+</ol>
+<pre><code>ATLAS_URI=mongodb+srv://&lt;usr&gt;:&lt;pwd&gt;@cluster0.mxggl0u.mongodb.net/?retryWrites=true&amp;w=majority
+DB_NAME=membership #自己定義資料庫
+</code></pre>
+<ol start="2">
+<li>main.py</li>
+</ol>
+<pre><code>from fastapi import FastAPI
+from dotenv import dotenv_values
+from pymongo import MongoClient
+from routes import router as member_router
+
+config = dotenv_values(&quot;.env&quot;) #讀取.env
+
+app = FastAPI() #設置主要的API
+
+# 設置允許串接ip，等等前端才能連進來
+origins = [
+    &quot;http://127.0.0.1:5500&quot;]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=[&quot;*&quot;],
+    allow_headers=[&quot;*&quot;],
+)
+
+@app.on_event(&quot;startup&quot;) #連接DB
+def startup_db_client():
+    app.mongodb_client = MongoClient(config[&quot;ATLAS_URI&quot;])
+    app.database = app.mongodb_client[config[&quot;DB_NAME&quot;]]
+
+
+@app.on_event(&quot;shutdown&quot;)
+def shutdown_db_client():
+    app.mongodb_client.close()
+
+# member_router是會員系統的router,若有需求可以設置多個router
+app.include_router(member_router, tags=[&quot;membership&quot;], prefix=&quot;/membership&quot;)
+</code></pre>
+<ol start="3">
+<li>models.py #建立資料格式</li>
+</ol>
+<pre><code>import uuid
+from typing import Optional
+from pydantic import BaseModel, Field
+
+
+class Member(BaseModel):
+    account: str = Field(max_length=16,
+                         min_length=8, description=&#39;最少輸入8個字元,最多16個字元&#39;)
+    password: str = Field(...)
+    name: str = Field(...)
+    phone: str = Field(...)
+    &#39;&#39;&#39;
+    Field(...)是必填欄位,Field（None） 是可選填
+    Field(None,title=&quot;The description of the item&quot;,max_length=10,alias=&#39;我是替代字&#39;)
+
+    &#39;&#39;&#39;
+
+    class Config:
+        allow_population_by_field_name = True
+        schema_extra = &#123;
+            &quot;example&quot;: &#123;
+                &quot;account&quot;: &quot;testtest123&quot;,
+                &quot;password&quot;: &quot;testpassword&quot;,
+                &quot;name&quot;: &quot;Ansel&quot;,
+                &quot;phone&quot;: &quot;0912345678&quot;
+            &#125;
+        &#125;
+
+
+class MemberUpdate(BaseModel):
+    name: Optional[str]
+    phone: Optional[str]
+
+    class Config:
+        schema_extra = &#123;
+            &quot;example&quot;: &#123;
+                &quot;name&quot;: &quot;NewName&quot;,
+                &quot;phone&quot;: &quot;0900123321&quot;
+            &#125;
+        &#125;
+</code></pre>
+<ol start="4">
+<li>routes.py #這邊只設置 membership的API，有需要可以多設置購物車等等的API</li>
+</ol>
+<pre><code>from fastapi import APIRouter, Body, Request, Response, HTTPException, status
+from fastapi.encoders import jsonable_encoder
+from typing import List
+
+from models import Member, MemberUpdate
+
+router = APIRouter()
+
+
+@router.post(&quot;/&quot;, response_description=&quot;Create a new account&quot;, status_code=status.HTTP_201_CREATED, response_model=Member)
+def create_member(request: Request, member: Member = Body(...)):
+    # 檢查帳號是否已存在
+    existing_member = request.app.database[&quot;member_data&quot;].find_one(
+        &#123;&quot;account&quot;: member.account&#125;
+    )
+    if existing_member:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=&quot;Account already exists&quot;)
+
+    # 新增會員
+    member = jsonable_encoder(member)
+    new_member = request.app.database[&quot;member_data&quot;].insert_one(member)
+    created_member = request.app.database[&quot;member_data&quot;].find_one(
+        &#123;&quot;_id&quot;: new_member.inserted_id&#125;
+    )
+
+    return created_member
+
+
+@router.get(&quot;/&quot;, response_description=&quot;List all member&quot;, response_model=List[Member])
+def list_memberships(request: Request):
+    books = list(request.app.database[&quot;member_data&quot;].find(limit=100))
+    return books
+
+
+@router.get(&quot;/&#123;account&#125;&quot;, response_description=&quot;Get member by id&quot;, response_model=Member)
+def find_member(account: str, request: Request):
+    if (member := request.app.database[&quot;member_data&quot;].find_one(&#123;&quot;account&quot;: account&#125;)) is not None:
+        return member
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f&quot;Member with account &#123;account&#125; not found&quot;)
+
+
+@router.patch(&quot;/&#123;account&#125;&quot;, response_description=&quot;Update member info&quot;, response_model=Member)
+def update_member(account: str, request: Request, member: MemberUpdate = Body(...)):
+    member = &#123;k: v for k, v in member.dict().items() if v is not None&#125;
+
+    if len(member) &gt;= 1:
+        update_result = request.app.database[&quot;member_data&quot;].update_one(
+            &#123;&quot;account&quot;: account&#125;, &#123;&quot;$set&quot;: member&#125;
+        )
+
+        if update_result.modified_count == 0:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=f&quot;Member with ID &#123;account&#125; not found&quot;)
+
+    if (
+        existing_book := request.app.database[&quot;member_data&quot;].find_one(&#123;&quot;account&quot;: account&#125;)
+    ) is not None:
+        return existing_book
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f&quot;Member with ID &#123;account&#125; not found&quot;)
+
+
+@router.delete(&quot;/&#123;account&#125;&quot;, response_description=&quot;Delete account&quot;)
+def delete_member(account: str, request: Request, response: Response):
+    delete_result = request.app.database[&quot;member_data&quot;].delete_one(
+        &#123;&quot;account&quot;: account&#125;)
+
+    if delete_result.deleted_count == 1:
+        response.status_code = status.HTTP_204_NO_CONTENT
+        return response
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f&quot;Member with ID &#123;account&#125; not found&quot;)
+</code></pre>
+<p>這邊我用啟動後的畫面比較好懂<br><img src="./swagger.jpg" alt="swagger" style="display:block; margin:auto;"/></p>
+<p>上面可以看到用<br>GET &#x2F;membership&#x2F;:得到DB內的所有資料<br>POST &#x2F;membership&#x2F;:建立會員資料<br>GET &#x2F;membership&#x2F;{account}:{account}內帶入要查詢的帳號<br>DELETE &#x2F;membership&#x2F;{account}:{account}內帶入要刪除的帳號<br>PATCH &#x2F;membership&#x2F;{account}:{account}內帶入要更新的帳號</p>
+<p>至於啟動的部分會用到uvicorn來跑這隻程式，在終端機輸入</p>
+<pre><code>python -m uvicorn main:app --reload
+</code></pre>
+<p>跑起來會出現</p>
+<pre><code>INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [9560] using watchgod
+INFO:     Started server process [9244]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+</code></pre>
+<p>之後再瀏覽器輸入<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a> 就會進入剛才的swagger UI了，便可以開始做測試</p>
+<p>不想開啟也可以用curl指令進行測試，不過這邊不贅述。</p>
+<h1 id="網頁前端"><a href="#網頁前端" class="headerlink" title="網頁前端"></a>網頁前端</h1><img src="./signup.jpg"  alt="註冊畫面" />
+
+<pre><code>&lt;script&gt;
+
+      $(document).ready(function () &#123;
+         $(&#39;#formId&#39;).submit(function (event) &#123;
+            // 防止提交默認
+            event.preventDefault();
+
+            // 獲取表單數據
+            var account = $(&#39;#account&#39;).val();
+            var password = $(&#39;#password&#39;).val();
+            var name = $(&#39;#name&#39;).val();
+            var contactNumber = $(&#39;#phone&#39;).val();
+
+            // POST Requests with JSON
+            $.ajax(&#123;
+               url: &#39;http://127.0.0.1:8000/membership/&#39;,
+               type: &#39;POST&#39;,
+               contentType: &#39;application/json&#39;,
+               data: JSON.stringify(&#123;
+                  account: account,
+                  password: password,
+                  name: name,
+                  phone: contactNumber
+               &#125;),
+
+               success: function (response) &#123;
+                  console.log(response);
+               &#125;,
+               error: function (xhr, status, error) &#123;
+                  console.error(error);
+               &#125;
+            &#125;);
+         &#125;);
+      &#125;);
+
+   &lt;/script&gt;
+
+   &lt;form class=&quot;transfot&quot; id=&#39;formId&#39;&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;span&gt;Sign up&lt;/span&gt;
+        &lt;h3&gt;Let start!&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;input class=&quot;col-md-12&quot; id=&quot;account&quot; placeholder=&quot;Account&quot; type=&quot;text&quot;
+            name=&quot;Account&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;input class=&quot;col-md-12&quot; id=&quot;password&quot; placeholder=&quot;Password&quot; type=&quot;text&quot;
+            name=&quot;Password&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;input class=&quot;col-md-12&quot; id=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot; name=&quot;Name&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;input class=&quot;col-md-12&quot; id=&quot;phone&quot; placeholder=&quot;Contact Number&quot; type=&quot;text&quot;
+            name=&quot;Contact Number&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;col-md-12&quot;&gt;
+        &lt;button type=&#39;submit&#39; id=&#39;submitButton&#39;&gt;Sign up&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+</code></pre>
+<p>AJAX程式碼大致是這樣</p>
+<br/>
+<img src="./ajaxpost.jpg"  alt="postdata" />
+填好資料後送出
+<br/>
+<img src="./console.jpg" alt="postsuccess" />
+<br/>
+
+<p>可以看到console回傳JSON格式，且FAST API的terminal顯示POST Created<br>之後再進到Swagger用GET memberlist驗證</p>
+<br/>
+<div style="float: left; width: 50%;">
+  <img src="./get1.jpg" alt="before" style="display:block; margin:auto;" />
+</div>
+<div tyle="float: right; width: 50%;">
+  <img src="./get2.jpg" alt="after" style="display:block; margin:auto;"width="50%"/>
+</div>
+<br/>
+
+<p>左邊是傳送前只有一筆資料，右邊可以看到剛剛POST進來的第二筆。</p>
+<p>簡單的前後端連接就完成啦!</p>
+<h1 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/docs/atlas/tutorial/connect-to-your-cluster/?_ga=2.105960192.2035563352.1678696693-1842266058.1678696693#connect-to-your-atlas-cluster">https://www.mongodb.com/docs/atlas/tutorial/connect-to-your-cluster/?_ga=2.105960192.2035563352.1678696693-1842266058.1678696693#connect-to-your-atlas-cluster</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/languages/python/pymongo-tutorial">https://www.mongodb.com/languages/python/pymongo-tutorial</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/docs/drivers/pymongo/">https://www.mongodb.com/docs/drivers/pymongo/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1949684">https://cloud.tencent.com/developer/article/1949684</a></li>
+<li><a target="_blank" rel="noopener" href="https://chat.openai.com/chat">https://chat.openai.com/chat</a></li>
+</ul>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/04/07/membersys/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">次の記事</div>
+      <div class="article-nav-title">
+        
+          [會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/06/clockapp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">前の記事</div>
+      <div class="article-nav-title">[PyQt5] 做一個GUI介面的時鐘吧!</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">シェア</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[Fastapi] 快速製作一個會員後台API,並用ajax串接 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F03%2F15%2Ffastapi%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[Fastapi] 快速製作一個會員後台API,並用ajax串接 - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F03%2F15%2Ffastapi%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[Fastapi] 快速製作一個會員後台API,並用ajax串接 - Ansel's Blog&url=http://example.com/2023/03/15/fastapi/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

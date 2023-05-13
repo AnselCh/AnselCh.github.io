@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[PyQt5] 做一個GUI介面的時鐘吧! | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;img src=&#34;./max.jpg&#34; alt=&#34;max&#34; style=&#34;display:block; margin:auto;&#34;/&gt;
+
+&lt;p&gt;專案地址:&lt;a href=&#34;https://github.com/AnselCh/widget_clock&#34;&gt;https://github.com/AnselCh/widget_clock&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;目標&#34;&gt;&lt;a href=&#34;#目標&#34; class=&#34;headerlink&#34; title=&#34;目標&#34;&gt;&lt;/a&gt;目標&lt;/h1&gt;&lt;p&gt;做出一個可以自訂位子且能調整透明度的小時鐘。&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[PyQt5] 做一個GUI介面的時鐘吧! | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;img src=&#34;./max.jpg&#34; alt=&#34;max&#34; style=&#34;display:block; margin:auto;&#34;/&gt;
+
+&lt;p&gt;專案地址:&lt;a href=&#34;https://github.com/AnselCh/widget_clock&#34;&gt;https://github.com/AnselCh/widget_clock&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;目標&#34;&gt;&lt;a href=&#34;#目標&#34; class=&#34;headerlink&#34; title=&#34;目標&#34;&gt;&lt;/a&gt;目標&lt;/h1&gt;&lt;p&gt;做出一個可以自訂位子且能調整透明度的小時鐘。&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/03/06/clockapp/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;img src=&#34;./max.jpg&#34; alt=&#34;max&#34; style=&#34;display:block; margin:auto;&#34;/&gt;
+
+&lt;p&gt;專案地址:&lt;a href=&#34;https://github.com/AnselCh/widget_clock&#34;&gt;https://github.com/AnselCh/widget_clock&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;目標&#34;&gt;&lt;a href=&#34;#目標&#34; class=&#34;headerlink&#34; title=&#34;目標&#34;&gt;&lt;/a&gt;目標&lt;/h1&gt;&lt;p&gt;做出一個可以自訂位子且能調整透明度的小時鐘。&lt;/p&gt;" />
+    <meta name="twitter:title" content="[PyQt5] 做一個GUI介面的時鐘吧! | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;img src=&#34;./max.jpg&#34; alt=&#34;max&#34; style=&#34;display:block; margin:auto;&#34;/&gt;
+
+&lt;p&gt;專案地址:&lt;a href=&#34;https://github.com/AnselCh/widget_clock&#34;&gt;https://github.com/AnselCh/widget_clock&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;目標&#34;&gt;&lt;a href=&#34;#目標&#34; class=&#34;headerlink&#34; title=&#34;目標&#34;&gt;&lt;/a&gt;目標&lt;/h1&gt;&lt;p&gt;做出一個可以自訂位子且能調整透明度的小時鐘。&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;meta name=&#34;referrer&#34; content=&#34;no-referrer&#34; /&gt;
+
+&lt;img src=&#34;./max.jpg&#34; alt=&#34;max&#34; style=&#34;display:block; margin:auto;&#34;/&gt;
+
+&lt;p&gt;專案地址:&lt;a href=&#34;https://github.com/AnselCh/widget_clock&#34;&gt;https://github.com/AnselCh/widget_clock&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;目標&#34;&gt;&lt;a href=&#34;#目標&#34; class=&#34;headerlink&#34; title=&#34;目標&#34;&gt;&lt;/a&gt;目標&lt;/h1&gt;&lt;p&gt;做出一個可以自訂位子且能調整透明度的小時鐘。&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/03/06/clockapp/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[PyQt5] 做一個GUI介面的時鐘吧! | Ansel&#39;s Blog",
+            "datePublished": "2023-03-06T03:06:13.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/03/06/clockapp/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clhlmltfn0001mbrhb6s82k9g" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [PyQt5] 做一個GUI介面的時鐘吧!
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-03-06T03:06:13.000Z" itemprop="datePublished">2023-03-06</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/repository/">repository</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <meta name="referrer" content="no-referrer" />
+
+<img src="./max.jpg" alt="max" style="display:block; margin:auto;"/>
+
+<p>專案地址:<a target="_blank" rel="noopener" href="https://github.com/AnselCh/widget_clock">https://github.com/AnselCh/widget_clock</a></p>
+<h1 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h1><p>做出一個可以自訂位子且能調整透明度的小時鐘。</p>
+<span id="more"></span>
+
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><pre><code>from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from time import strftime
+import sys
+import threading
+</code></pre>
+<p>載入GUI套件跟多執行緒，因為不能因調整透明度導致時間暫停更新，所以採用多執行緒。</p>
+<pre><code>class MyWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle(&#39;Ann Clock&#39;)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)  # 視窗置頂
+        self.setWindowFlag(Qt.FramelessWindowHint)  # 標題列消失
+        self.setAttribute(Qt.WA_TranslucentBackground)  # 整個label以外設為半透明
+        self.resize(360, 110)
+        self.setUpdatesEnabled(True)  # 時間更新的Thread
+        self.ui()
+        self.clock_window = True
+</code></pre>
+<p>主視窗建置跟設定</p>
+<pre><code>def ui(self):
+
+        self.label_time = QLabel(self)
+        font = QFont()
+        font.setFamily(&#39;calibri&#39;)
+        font.setPointSize(40)
+        font.setBold(True)
+        self.label = QLabel(self)
+        self.label.setGeometry(140, 90, 100, 30)
+        self.label_time.setFont(font)
+        self.label_time.setAlignment(Qt.AlignCenter)
+        radius = 12
+        self.label_time.setStyleSheet(&#39;&#39;&#39;
+            color:	black;
+            background:rgb(245, 245, 245);
+            border-top-left-radius:&#123;0&#125;px;
+            border-bottom-left-radius:&#123;0&#125;px;
+            border-top-right-radius:&#123;0&#125;px;
+            border-bottom-right-radius:&#123;0&#125;px;
+            &#39;&#39;&#39;.format(radius))
+        self.slider = QSlider(self)
+        self.slider.setGeometry(30, 75, 300, 30)
+        self.slider.setRange(1, 10)
+        self.slider.setValue(5)
+        self.slider.setOrientation(1)
+        self.slider.setStyleSheet(&#39;&#39;&#39;
+        QSlider &#123;   border-radius: 10px;    &#125;
+        QSlider::groove:horizontal &#123;
+            height: 5px;
+            background: #C2C287;
+        &#125;
+        QSlider::handle:horizontal&#123;
+            background: #FFFFAA;
+            width: 16px;
+            height: 16px;
+            margin:-6px 0;
+            border-radius:8px;
+        &#125;
+        QSlider::sub-page:horizontal&#123;
+            background:#A5A552;
+        &#125;
+        &#39;&#39;&#39;)
+</code></pre>
+<p>setStyleSheet設定四個角的平滑度跟label顏色<br>並加上slider(滑桿)調整透明度</p>
+<pre><code>def nowtime(self):
+        while self.clock_window:
+            string = strftime(&#39;%H:%M:%S %p&#39;)
+            self.label_time.setText(string)
+</code></pre>
+<p>這邊是刷新時間的while迴圈，等等會用一個執行緒調用</p>
+<pre><code>def transparency(self):
+        while self.clock_window:
+            user_setting = ((self.slider.value())/10)
+            tran = user_setting
+            self.setWindowOpacity(tran)
+</code></pre>
+<p>這邊是讀取slider調整數值while迴圈，等等會用另一個執行緒調用，來實現一邊調整透明度又不影響時間更新。</p>
+<pre><code>def closeEvent(self, event):
+        self.clock_window = False
+
+def mousePressEvent(self, event):
+    self.oldPosition = event.globalPos()
+
+def mouseMoveEvent(self, event):
+    delta = QPoint(event.globalPos() - self.oldPosition)
+    self.move(self.x() + delta.x(), self.y() + delta.y())
+    self.oldPosition = event.globalPos()
+</code></pre>
+<p>closeEvent是結束視窗函數，下面兩段則是讓視窗能夠點及任何位子就能拉到自訂位子，不過在ubuntu上執行位子會有點怪怪的，不確定是不是我個人問題?</p>
+<pre><code>if __name__ == &#39;__main__&#39;:
+    app = QApplication(sys.argv)
+    window = MyWidget()
+    clock = threading.Thread(target=window.nowtime)
+    se = threading.Thread(target=window.transparency)
+    clock.start()
+    se.start()
+    window.show()
+    sys.exit(app.exec_())
+</code></pre>
+<p>最後是啟動GUI的函式。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/03/15/fastapi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">次の記事</div>
+      <div class="article-nav-title">
+        
+          [Fastapi] 快速製作一個會員後台API,並用ajax串接
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/01/yolov5-practice/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">前の記事</div>
+      <div class="article-nav-title">[Pytorch] 嘗試用Yolov5做車牌辨識</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">シェア</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[PyQt5] 做一個GUI介面的時鐘吧! - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F03%2F06%2Fclockapp%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[PyQt5] 做一個GUI介面的時鐘吧! - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F03%2F06%2Fclockapp%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[PyQt5] 做一個GUI介面的時鐘吧! - Ansel's Blog&url=http://example.com/2023/03/06/clockapp/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

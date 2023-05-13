@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[Pytorch] Yolov5的一些筆記 | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;p&gt;&lt;a href=&#34;https://github.com/ultralytics/yolov5/issues/36&#34;&gt;Load YOLOv5 from PyTorch Hub &lt;/a&gt;&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[Pytorch] Yolov5的一些筆記 | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;p&gt;&lt;a href=&#34;https://github.com/ultralytics/yolov5/issues/36&#34;&gt;Load YOLOv5 from PyTorch Hub &lt;/a&gt;&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2023/02/18/yolo-tips/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;p&gt;&lt;a href=&#34;https://github.com/ultralytics/yolov5/issues/36&#34;&gt;Load YOLOv5 from PyTorch Hub &lt;/a&gt;&lt;/p&gt;" />
+    <meta name="twitter:title" content="[Pytorch] Yolov5的一些筆記 | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;p&gt;&lt;a href=&#34;https://github.com/ultralytics/yolov5/issues/36&#34;&gt;Load YOLOv5 from PyTorch Hub &lt;/a&gt;&lt;/p&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;p&gt;&lt;a href=&#34;https://github.com/ultralytics/yolov5/issues/36&#34;&gt;Load YOLOv5 from PyTorch Hub &lt;/a&gt;&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/02/18/yolo-tips/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[Pytorch] Yolov5的一些筆記 | Ansel&#39;s Blog",
+            "datePublished": "2023-02-18T01:15:38.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/02/18/yolo-tips/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clhlmltfu000vmbrh5cgd9eby" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [Pytorch] Yolov5的一些筆記
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-02-18T01:15:38.000Z" itemprop="datePublished">2023-02-18</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/" rel="tag">ML</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/issues/36">Load YOLOv5 from PyTorch Hub </a></p>
+<span id="more"></span>
+
+<p><strong>Detailed Example</strong></p>
+<pre><code>import cv2
+import torch
+from PIL import Image
+
+# Model
+model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;yolov5s&#39;)
+
+# Custom Models
+model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;custom&#39;, path=&#39;path/to/best.pt&#39;)  # local model
+model = torch.hub.load(&#39;path/to/yolov5&#39;, &#39;custom&#39;, path=&#39;path/to/best.pt&#39;, source=&#39;local&#39;)  # local repo
+
+# load on CPU
+model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;yolov5s&#39;, device=&#39;cpu&#39;)
+
+# Images
+for f in &#39;zidane.jpg&#39;, &#39;bus.jpg&#39;:
+    torch.hub.download_url_to_file(&#39;https://ultralytics.com/images/&#39; + f, f)  # download 2 images
+im1 = Image.open(&#39;zidane.jpg&#39;)  # PIL image
+im2 = cv2.imread(&#39;bus.jpg&#39;)[..., ::-1]  # OpenCV image (BGR to RGB)
+
+# Inference
+results = model([im1, im2], size=640) # batch of images
+
+# Results
+results.print()
+results.save()  # or .show()
+
+results.xyxy[0]  # im1 predictions (tensor)
+results.pandas().xyxy[0]  # im1 predictions (pandas)
+</code></pre>
+<p><strong>Inference Settings</strong></p>
+<pre><code>model.conf = 0.25  # NMS confidence threshold
+      iou = 0.45  # NMS IoU threshold
+      agnostic = False  # NMS class-agnostic
+      multi_label = False  # NMS multiple labels per box
+      classes = None  # (optional list) filter by class, i.e. = [0, 15, 16] for COCO persons, cats and dogs
+      max_det = 1000  # maximum number of detections per image
+      amp = False  # Automatic Mixed Precision (AMP) inference
+
+results = model(im, size=320)  # custom inference size
+</code></pre>
+<p><strong>Cropped Results</strong></p>
+<pre><code>results = model(img)
+crops = results.crop(
+    save=True, save_dir=r&#39;path&#39;)
+</code></pre>
+<p><strong>Pandas Results</strong></p>
+<pre><code>results = model(im)  # inference
+results.pandas().xyxy[0]  # Pandas DataFrame
+</code></pre>
+<p><strong>JSON Results</strong></p>
+<pre><code>results = model(ims)  # inference
+results.pandas().xyxy[0].to_json(orient=&quot;records&quot;)  # JSON img1 predictions
+</code></pre>
+<p><strong>Training</strong></p>
+<pre><code>model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;yolov5s&#39;, autoshape=False)  # load pretrained
+model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;yolov5s&#39;, autoshape=False, pretrained=False)  # load scratch
+</code></pre>
+<p><strong>TensorRT, ONNX and OpenVINO Models</strong></p>
+<pre><code># ProTip: TensorRT may be up to 2-5X faster than PyTorch on GPU benchmarks
+model = torch.hub.load(&#39;ultralytics/yolov5&#39;, &#39;custom&#39;, path=&#39;yolov5s.pt&#39;)  # PyTorch
+                                                            &#39;yolov5s.torchscript&#39;)  # TorchScript
+                                                            &#39;yolov5s.onnx&#39;)  # ONNX
+                                                            &#39;yolov5s_openvino_model/&#39;)  # OpenVINO
+                                                            &#39;yolov5s.engine&#39;)  # TensorRT
+                                                            &#39;yolov5s.mlmodel&#39;)  # CoreML (macOS-only)
+                                                            &#39;yolov5s.tflite&#39;)  # TFLite
+                                                            &#39;yolov5s_paddle_model/&#39;)  # PaddlePaddle
+</code></pre>
+<p><strong>training</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data">Train Custom Data</a><br><a target="_blank" rel="noopener" href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb">Colab</a></p>
+<pre><code>git clone https://github.com/ultralytics/yolov5  # clone
+cd yolov5
+pip install -r requirements.txt  # install
+pip install clearml
+# run clearml-init to connect to a ClearML server (deploy your own open-source server here, or use our free hosted server here)
+</code></pre>
+<p><strong>Export a Trained YOLOv5 Model</strong><br><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/issues/251">TFLite, ONNX, CoreML, TensorRT Export</a></p>
+<pre><code>python export.py --weights yolov5s.pt --include torchscript onnx openvino
+</code></pre>
+<p><strong>訓練自己資料</strong><br><a target="_blank" rel="noopener" href="https://officeguide.cc/pytorch-yolo-v5-object-egg-detection-models-tutorial-examples/">train</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2023/03/01/yolov5-practice/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">次の記事</div>
+      <div class="article-nav-title">
+        
+          [Pytorch] 嘗試用Yolov5做車牌辨識
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/08/pytorch-tips/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">前の記事</div>
+      <div class="article-nav-title">[Pytorch] 想用GPU跑ML環境卻裝不好?看完這篇帶你避開各種雷!</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">シェア</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[Pytorch] Yolov5的一些筆記 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F02%2F18%2Fyolo-tips%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[Pytorch] Yolov5的一些筆記 - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F02%2F18%2Fyolo-tips%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[Pytorch] Yolov5的一些筆記 - Ansel's Blog&url=http://example.com/2023/02/18/yolo-tips/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
