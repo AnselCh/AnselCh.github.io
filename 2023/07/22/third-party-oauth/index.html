@@ -213,7 +213,9 @@
         </div>
 
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
-            <h1 id="1-企業微信"><a href="#1-企業微信" class="headerlink" title="1. 企業微信"></a>1. 企業微信</h1><h2 id="創建應用透過官方API取得userid，達成SSO登入自家server"><a href="#創建應用透過官方API取得userid，達成SSO登入自家server" class="headerlink" title="創建應用透過官方API取得userid，達成SSO登入自家server"></a>創建應用透過官方API取得userid，達成SSO登入自家server</h2><h3 id="流程解說"><a href="#流程解說" class="headerlink" title="流程解說"></a>流程解說</h3><ul>
+            <span id="more"></span>
+
+<h1 id="1-企業微信"><a href="#1-企業微信" class="headerlink" title="1. 企業微信"></a>1. 企業微信</h1><h2 id="創建應用透過官方API取得userid，達成SSO登入自家server"><a href="#創建應用透過官方API取得userid，達成SSO登入自家server" class="headerlink" title="創建應用透過官方API取得userid，達成SSO登入自家server"></a>創建應用透過官方API取得userid，達成SSO登入自家server</h2><h3 id="流程解說"><a href="#流程解說" class="headerlink" title="流程解說"></a>流程解說</h3><ul>
 <li>企業透過corpid, secret取的access_token​<br>使用者點擊應用透過OAuth2.0授權後，企業可以帶corpid取得code(授權碼)​<br>企業用access_token,code向微信取得user_id​<br>企業用access_token,agent_id,user_id向特定user發送訊息​<br>透過OAuth2.0 API，企業後端可以取得user_id，達到透過微信進行免手動登入NUP系統</li>
 </ul>
 <h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><pre><code>agentId​：這支應用的id​
@@ -288,7 +290,8 @@ user_id​：員工識別碼​
 <li>前提是使用者必須先成為bot的好友<br>API: <a target="_blank" rel="noopener" href="https://api.line.me/v2/bot/message/push">https://api.line.me/v2/bot/message/push</a><br>方法：POST<br>內容參數：JSON，header需帶Messaging API channel token<br>推播內容可以參考：<a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/">https://developers.line.biz/en/reference/messaging-api/</a><br>其中<a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages">Flex Message</a>彈性最高，可以照使用者需求自行打造，開發者可以搭配<a target="_blank" rel="noopener" href="https://developers.line.biz/flex-simulator/?status=success">flex-simulator</a>快速打造樣板</li>
 </ul>
 <hr>
-<h1 id="1-MS-Teams"><a href="#1-MS-Teams" class="headerlink" title="1. MS Teams"></a>1. MS Teams</h1><h2 id="建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊"><a href="#建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊" class="headerlink" title="建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊"></a>建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊</h2>
+<h1 id="1-MS-Teams"><a href="#1-MS-Teams" class="headerlink" title="1. MS Teams"></a>1. MS Teams</h1><h2 id="建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊"><a href="#建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊" class="headerlink" title="建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊"></a>建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊</h2><p><strong>懶得寫</strong></p>
+
         </div>
 
     </div>
@@ -308,7 +311,7 @@ user_id​：員工識別碼​
   
   
     <a href="/2023/04/12/docker-memo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-caption">precedente</div>
+      <div class="article-nav-caption">上一篇</div>
       <div class="article-nav-title">[Docker] 練習筆記</div>
     </a>
   
@@ -316,7 +319,7 @@ user_id​：員工識別碼​
 
 
     <section class="share">
-        <div class="share-title">share</div>
+        <div class="share-title">分享</div>
         <a class="share-item" target="_blank"
             href="https://twitter.com/share?text=[筆記]第三方OAuth SSO登入 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F07%2F22%2Fthird-party-oauth%2F">
             <ion-icon name="logo-twitter"></ion-icon>
