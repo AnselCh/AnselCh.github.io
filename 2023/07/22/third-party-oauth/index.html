@@ -290,7 +290,20 @@ user_id​：員工識別碼​
 <li>前提是使用者必須先成為bot的好友<br>API: <a target="_blank" rel="noopener" href="https://api.line.me/v2/bot/message/push">https://api.line.me/v2/bot/message/push</a><br>方法：POST<br>內容參數：JSON，header需帶Messaging API channel token<br>推播內容可以參考：<a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/messaging-api/">https://developers.line.biz/en/reference/messaging-api/</a><br>其中<a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages">Flex Message</a>彈性最高，可以照使用者需求自行打造，開發者可以搭配<a target="_blank" rel="noopener" href="https://developers.line.biz/flex-simulator/?status=success">flex-simulator</a>快速打造樣板</li>
 </ul>
 <hr>
-<h1 id="1-MS-Teams"><a href="#1-MS-Teams" class="headerlink" title="1. MS Teams"></a>1. MS Teams</h1><h2 id="建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊"><a href="#建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊" class="headerlink" title="建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊"></a>建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊</h2><p><strong>懶得寫</strong></p>
+<h1 id="1-MS-Teams"><a href="#1-MS-Teams" class="headerlink" title="1. MS Teams"></a>1. MS Teams</h1><h2 id="建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊"><a href="#建立APP使用Tab＋Microsoft-Teams-SDK取的使用者資訊" class="headerlink" title="建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊"></a>建立APP使用Tab＋Microsoft Teams SDK取的使用者資訊</h2><ol>
+<li>使用<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/javascript/api/overview/msteams-client?view=msteams-client-js-latest&tabs=yarn">Microsoft Teams SDK</a>取得使用者的Teams Email，這個方式是不需使用者授權serever端可以直接取得的資訊，若要取的更多使用者權限可以使用GraphAPI取得更多的資訊及應用</li>
+<li>載入CDN</li>
+</ol>
+<pre><code>&lt;!-- Microsoft Teams JavaScript API (via CDN) --&gt;
+&lt;script
+  src=&quot;https://res.cdn.office.net/teams-js/2.14.0/js/MicrosoftTeams.min.js&quot;
+  crossorigin=&quot;anonymous&quot;
+&gt;&lt;/script&gt;
+</code></pre>
+<p>3. </p>
+<pre><code>microsoftTeams.initialize()
+microsoftTeams.app.getContext().then((context) =&gt; &#123;/*...*/&#125;);.
+</code></pre>
 
         </div>
 
