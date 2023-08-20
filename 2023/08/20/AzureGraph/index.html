@@ -6,12 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     
-    <title>Tag | RESTful API | Ansel&#39;s Blog</title>
+    <title>[筆記]Microsoft Graph API建立行事曆事件 | Ansel&#39;s Blog</title>
 
-    <meta name="description" content="Ansel&#39;s Blog">
+    <meta name="description" content="&lt;h1 id=&#34;建立應用程式&#34;&gt;&lt;a href=&#34;#建立應用程式&#34; class=&#34;headerlink&#34; title=&#34;建立應用程式&#34;&gt;&lt;/a&gt;建立應用程式&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;進入Azure Portal後左側選取應用程式註冊&lt;/li&gt;
+&lt;li&gt;點選API權限 -&amp;gt; 新增權限">
     <meta name="keywords" content="">
 
     
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[筆記]Microsoft Graph API建立行事曆事件 | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;h1 id=&#34;建立應用程式&#34;&gt;&lt;a href=&#34;#建立應用程式&#34; class=&#34;headerlink&#34; title=&#34;建立應用程式&#34;&gt;&lt;/a&gt;建立應用程式&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;進入Azure Portal後左側選取應用程式註冊&lt;/li&gt;
+&lt;li&gt;點選API權限 -&amp;gt; 新增權限" />
+    <meta property="og:url" content="http://example.com/2023/08/20/AzureGraph/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;h1 id=&#34;建立應用程式&#34;&gt;&lt;a href=&#34;#建立應用程式&#34; class=&#34;headerlink&#34; title=&#34;建立應用程式&#34;&gt;&lt;/a&gt;建立應用程式&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;進入Azure Portal後左側選取應用程式註冊&lt;/li&gt;
+&lt;li&gt;點選API權限 -&amp;gt; 新增權限" />
+    <meta name="twitter:title" content="[筆記]Microsoft Graph API建立行事曆事件 | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;h1 id=&#34;建立應用程式&#34;&gt;&lt;a href=&#34;#建立應用程式&#34; class=&#34;headerlink&#34; title=&#34;建立應用程式&#34;&gt;&lt;/a&gt;建立應用程式&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;進入Azure Portal後左側選取應用程式註冊&lt;/li&gt;
+&lt;li&gt;點選API權限 -&amp;gt; 新增權限"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;h1 id=&#34;建立應用程式&#34;&gt;&lt;a href=&#34;#建立應用程式&#34; class=&#34;headerlink&#34; title=&#34;建立應用程式&#34;&gt;&lt;/a&gt;建立應用程式&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;進入Azure Portal後左側選取應用程式註冊&lt;/li&gt;
+&lt;li&gt;點選API權限 -&amp;gt; 新增權限",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/08/20/AzureGraph/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[筆記]Microsoft Graph API建立行事曆事件 | Ansel&#39;s Blog",
+            "datePublished": "2023-08-20T07:38:10.245Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/08/20/AzureGraph/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
 
 
 
@@ -41,7 +86,7 @@
 
 
     <script>
-        window.isPost = false
+        window.isPost = true
         window.aomori = {
             
             
@@ -135,46 +180,142 @@
         <div class="main">
             <section class="inner">
                 <section class="inner-main">
-                    
+                    <div class="post">
+    <article id="post-cllj5nt1r00004lrhd8daa0z2" class="article article-type-post" itemscope
+    itemprop="blogPost">
 
-    
-    
-    
-    
-    <section class="archives-wrap">
-        <div class="archive-year-wrap">
-        <a href="/archives/2023" class="archive-year">2023</a>
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [筆記]Microsoft Graph API建立行事曆事件
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-08-20T07:38:10.245Z" itemprop="datePublished">2023-08-20</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AD%86%E8%A8%98/">工作筆記</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GraphAPI/" rel="tag">GraphAPI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li></ul>
+            </div>
+            
+
+            
+
         </div>
-        <div class="archives">
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="建立應用程式"><a href="#建立應用程式" class="headerlink" title="建立應用程式"></a>建立應用程式</h1><ol>
+<li>進入Azure Portal後左側選取應用程式註冊</li>
+<li>點選API權限 -&gt; 新增權限<span id="more"></span></li>
+<li>依照<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/graph/api/calendar-post-events?view=graph-rest-1.0&tabs=http">官方</a>給予Calendars.ReadWrite權限</li>
+<li>附帶的建立json格式參考官方範例，若要同時加入多位參與者可參考以下內容</li>
+</ol>
+<pre><code>  &quot;attendees&quot;: [
+        &#123;
+            &quot;emailAddress&quot;: &#123;
+                &quot;address&quot;: &quot;&#123;受邀者1的Email&#125;&quot;,
+                &quot;name&quot;: &quot;&#123;受邀者1的名子&#125;&quot;
+            &#125;
+        &#125;,
+        &#123;
+            &quot;emailAddress&quot;: &#123;
+                &quot;address&quot;: &quot;&#123;受邀者2的Email&#125;&quot;,
+                &quot;name&quot;: &quot;&#123;受邀者1的名子&#125;&quot;
+            &#125;,
+            &quot;type&quot;: &quot;required&quot;
+        &#125;
+    ],
+  &quot;organizer&quot;: &#123;
+    &quot;emailAddress&quot;: &#123;
+      &quot;address&quot;: &quot;&#123;會議召集人的Email&#125;&quot;,
+      &quot;name&quot;: &quot;&#123;會議召集人的名子&#125;&quot;
+    &#125;
+  &#125;
+</code></pre>
+<h3 id="推薦使用官方api測試網址測試"><a href="#推薦使用官方api測試網址測試" class="headerlink" title="推薦使用官方api測試網址測試"></a>推薦使用<a target="_blank" rel="noopener" href="https://developer.microsoft.com/en-us/graph/graph-explorer">官方api測試網址</a>測試</h3>
+        </div>
+
+    </div>
+
     
-    <article class="archive-article archive-type-post">
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
   
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
-    </h1>
+    <a href="/2023/07/22/third-party-oauth/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">precedente</div>
+      <div class="article-nav-title">[筆記]第三方OAuth SSO登入</div>
+    </a>
   
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">share</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[筆記]Microsoft Graph API建立行事曆事件 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F08%2F20%2FAzureGraph%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[筆記]Microsoft Graph API建立行事曆事件 - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F08%2F20%2FAzureGraph%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[筆記]Microsoft Graph API建立行事曆事件 - Ansel's Blog&url=http://example.com/2023/08/20/AzureGraph/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
 
 </article>
 
-    
-    
-    <article class="archive-article archive-type-post">
-  
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
-    </h1>
-  
-
-</article>
-
-
-    </div></section>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+</div>
                 </section>
             </section>
 
@@ -185,6 +326,12 @@
       <div class="widget" id="widget">
         
           
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
             
           
   <div class="widget-wrap widget-cate">
