@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>[筆記]用IIS部署.NET TeamsBot | Ansel&#39;s Blog</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;前置準備&#34;&gt;&lt;a href=&#34;#前置準備&#34; class=&#34;headerlink&#34; title=&#34;前置準備&#34;&gt;&lt;/a&gt;前置準備&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名稱&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;備註&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;IIS&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Windows Server 2016以上​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSL&amp;#x2F;TSL憑證&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Bot Endpoint，外網需要能打到​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Aspnetcore-Runtime&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-Hosting&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-SDK&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;開發者用​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure AD帳號&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;需要有Team開發權限​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    <meta property="og:locale" content="zh-tw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content= "[筆記]用IIS部署.NET TeamsBot | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;h1 id=&#34;前置準備&#34;&gt;&lt;a href=&#34;#前置準備&#34; class=&#34;headerlink&#34; title=&#34;前置準備&#34;&gt;&lt;/a&gt;前置準備&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名稱&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;備註&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;IIS&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Windows Server 2016以上​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSL&amp;#x2F;TSL憑證&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Bot Endpoint，外網需要能打到​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Aspnetcore-Runtime&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-Hosting&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-SDK&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;開發者用​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure AD帳號&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;需要有Team開發權限​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;" />
+    <meta property="og:url" content="http://example.com/2023/09/17/TeamsBot/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
+    <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;h1 id=&#34;前置準備&#34;&gt;&lt;a href=&#34;#前置準備&#34; class=&#34;headerlink&#34; title=&#34;前置準備&#34;&gt;&lt;/a&gt;前置準備&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名稱&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;備註&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;IIS&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Windows Server 2016以上​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSL&amp;#x2F;TSL憑證&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Bot Endpoint，外網需要能打到​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Aspnetcore-Runtime&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-Hosting&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-SDK&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;開發者用​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure AD帳號&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;需要有Team開發權限​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;" />
+    <meta name="twitter:title" content="[筆記]用IIS部署.NET TeamsBot | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;h1 id=&#34;前置準備&#34;&gt;&lt;a href=&#34;#前置準備&#34; class=&#34;headerlink&#34; title=&#34;前置準備&#34;&gt;&lt;/a&gt;前置準備&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名稱&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;備註&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;IIS&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Windows Server 2016以上​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSL&amp;#x2F;TSL憑證&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Bot Endpoint，外網需要能打到​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Aspnetcore-Runtime&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-Hosting&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-SDK&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;開發者用​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure AD帳號&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;需要有Team開發權限​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;"/>
+    <script type="application/ld+json">
+        {
+            "description": "&lt;h1 id=&#34;前置準備&#34;&gt;&lt;a href=&#34;#前置準備&#34; class=&#34;headerlink&#34; title=&#34;前置準備&#34;&gt;&lt;/a&gt;前置準備&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名稱&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;備註&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;IIS&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;Windows Server 2016以上​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSL&amp;#x2F;TSL憑證&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Bot Endpoint，外網需要能打到​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Aspnetcore-Runtime&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-Hosting&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dotnet-SDK&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;開發者用​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Azure AD帳號&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;需要有Team開發權限​&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2023/09/17/TeamsBot/index.html",
+            "publisher": {
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
+            },
+            "name": "Ansel Ch"
+            },
+            "headline": "[筆記]用IIS部署.NET TeamsBot | Ansel&#39;s Blog",
+            "datePublished": "2023-09-17T07:15:49.904Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2023/09/17/TeamsBot/index.html"
+            },
+            "@context": "http://schema.org"
+        }
+    </script>
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1654266144177.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1654266144177.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="\images\AN_logo2.png" alt="Ansel Ch">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Ansel&#39;s Blog</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/about">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/AnselCh">
+        <ion-icon name="logo-github"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/ansel-chen-779b7625b/">
+        <ion-icon name="logo-linkedin"></ion-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://medium.com/@anannannan0102">
+        <ion-icon name="logo-medium"></ion-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/about">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-clmn5db3o00001orhfudd3fyo" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [筆記]用IIS部署.NET TeamsBot
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2023-09-17T07:15:49.904Z" itemprop="datePublished">2023-09-17</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AD%86%E8%A8%98/">工作筆記</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Net/" rel="tag">.Net</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bot/" rel="tag">Bot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C#</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="前置準備"><a href="#前置準備" class="headerlink" title="前置準備"></a>前置準備</h1><table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>版本</th>
+<th>備註</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IIS</td>
+<td>10</td>
+<td>Windows Server 2016以上​</td>
+</tr>
+<tr>
+<td>SSL&#x2F;TSL憑證</td>
+<td></td>
+<td>Bot Endpoint，外網需要能打到​</td>
+</tr>
+<tr>
+<td>Aspnetcore-Runtime</td>
+<td>6</td>
+<td></td>
+</tr>
+<tr>
+<td>Dotnet-Hosting</td>
+<td>6</td>
+<td></td>
+</tr>
+<tr>
+<td>Dotnet-SDK</td>
+<td>6</td>
+<td>開發者用​</td>
+</tr>
+<tr>
+<td>Azure AD帳號</td>
+<td></td>
+<td>需要有Team開發權限​</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+<ol>
+<li>IIS需要 Ver10才支援dotnet6的部署</li>
+<li>因為推播需要透過微軟的API回傳到Bot的Server端，所以需要有對外的HTTPS Domain</li>
+<li>Aspnetcore-Runtime &#x2F; Dotnet-Hosting 6 是部署在IIS需要的套件（IIS原生只支援到4）</li>
+<li>SDK為開發者開發時才需要用到</li>
+<li>Azure AD要有開發者權限才能測試部署Bot在Teams上做測試</li>
+</ol>
+<h1 id="建立Teams-bot"><a href="#建立Teams-bot" class="headerlink" title="建立Teams bot"></a>建立Teams bot</h1><p><strong>有兩種選擇</strong><br>A. 使用官方提供的Teams Tool用 Visual Studio開發<br>B. 自己手動建立BOT綁定Teams Bot</p>
+<blockquote>
+<p>因為A.官方文件齊全及設定方式簡單這邊不介紹，先簡單說明手動建立的流程</p>
+</blockquote>
+<ol>
+<li>建立Teams Bot，取得Azure的id與密碼​</li>
+<li>修改安裝包的設定檔​</li>
+<li>設定IIS站台​</li>
+<li>測試推播</li>
+</ol>
+<hr>
+<ol>
+<li><p>建立Teams Bot</p>
+<img src="./CreateBot.png"  alt="機器人" />
+使用Teams開發者工具選擇建立機器人，需要填入https的外部網址，並且預設使用5130 port/api/messages(官方範本設定)
+建立好後記下金鑰跟Azure AD上應用程式註冊的識別碼(AD上的服務會自動建立)
+</li>
+<li><p>建立Teams App並綁定Bot</p>
+<img src="./CreateTeamsAPP.png"  alt="TeamsAPP" />
+在左側應用程式功能點選聊天機器人後選擇剛剛建立好的機器人，未來User加入APP就可以接收機器人的推播
+</li>
+<li><p>修改安裝包的設定檔​<br>將appsetting.json的BOT_id and Bot_PASSWORD改成第一步驟所取得的值</p>
+</li>
+<li><p>將整個BOT專案部署在IIS<br>確認站台已經安裝.NET6的hosting，並新增應用程式集區 .NET CLR版本選「沒有受控碼」<br>新增站台後分配5130port，若要更改要改code</p>
+</li>
+</ol>
+<p><strong>建立好後需要將專案資料夾新增權限給IIS</strong></p>
+<ol start="5">
+<li>將APP測試發布<img src="./realeseAPP.png"  alt="機器人" />
+測試帳號就可以加入APP
+可以使用postman測試訊息是否正常發送
+成功後再發布到組織內</li>
+</ol>
+<p>​</p>
+<p>​</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/2023/08/20/AzureGraph/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">前の記事</div>
+      <div class="article-nav-title">[筆記]Microsoft Graph API建立行事曆事件</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">シェア</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[筆記]用IIS部署.NET TeamsBot - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2023%2F09%2F17%2FTeamsBot%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[筆記]用IIS部署.NET TeamsBot - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2023%2F09%2F17%2FTeamsBot%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[筆記]用IIS部署.NET TeamsBot - Ansel's Blog&url=http://example.com/2023/09/17/TeamsBot/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+      <div class="widget" id="widget">
+        
+          
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/repository/">repository</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tutorial/">tutorial</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AD%86%E8%A8%98/">工作筆記</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Net/" rel="tag">.Net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bot/" rel="tag">Bot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphAPI/" rel="tag">GraphAPI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TeamsBot/" rel="tag">TeamsBot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+    </div>
+  </div>
+
+
+            
+          
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/17/TeamsBot/">[筆記]用IIS部署.NET TeamsBot</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/20/AzureGraph/">[筆記]Microsoft Graph API建立行事曆事件</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/22/third-party-oauth/">[筆記]第三方OAuth SSO登入</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+            
+          
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+    </div>
+  </div>
+
+
+            
+      </div>
+      <div id="backtop"><i class="icon icon-arrow-up"></i></div>
+      <br />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+        data-name="bmc-button" data-slug="anselch" data-color="#515d94" data-emoji="" data-font="Bree"
+        data-text="Buy me a milktea !" data-outline-color="#ffffff" data-font-color="#ffffff"
+        data-coffee-color="#FFDD00"></script>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Ansel&#39;s Blog &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@6.0.2/dist/ionicons/ionicons.esm.js"></script>
+
+
+
+
+
+
+<script src="/dist/build.js?1654266144177.js"></script>
+
+
+<script src="/dist/custom.js?1654266144177.js"></script>
+
+
+
+
+
+<!-- Google Analytics-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQHE4N08DZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-KQHE4N08DZ');
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
