@@ -160,6 +160,135 @@
   
     
       <article
+id="post-PythonMemo"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2024/01/12/PythonMemo/">python筆記</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="ARM晶片用conda模擬x86"><a href="#ARM晶片用conda模擬x86" class="headerlink" title="ARM晶片用conda模擬x86"></a>ARM晶片用conda模擬x86</h1><ol>
+<li>建立x86環境<br>這邊使用conda + python3.10</li>
+</ol>
+<pre><code>CONDA_SUBDIR=osx-64 conda create -n rosetta python=3.10
+</code></pre>
+<ol start="2">
+<li>切換環境確認切到x86</li>
+</ol>
+<pre><code>conda activate rosetta
+python -c &quot;import platform;print(platform.machine())&quot;
+#x86_64
+</code></pre>
+<h2 id="寫shell自動啟動py程式"><a href="#寫shell自動啟動py程式" class="headerlink" title="寫shell自動啟動py程式"></a>寫shell自動啟動py程式</h2><pre><code>#!/bin/bash
+
+# 啟動 conda 環境
+source activate rosetta
+
+# 切換目錄到最新日期的檔案夾
+latest_dir=$(ls -dt /Users/ansel/Desktop/DIR* | head -n 1)
+cd &quot;$latest_dir&quot;
+
+# 執行 Python 腳本
+python3 ./settings.py
+</code></pre>
+<p>給予執行權限</p>
+<pre><code>sudo chmod +x ./settings.py
+</code></pre>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2024-01-12T12:49:59.000Z" itemprop="datePublished">2024-01-12</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-line-liff"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/2023/11/19/line-liff/">LINE-LIFF 使用說明</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="LINE-LIFF"><a href="#LINE-LIFF" class="headerlink" title="LINE-LIFF"></a>LINE-LIFF</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><h1 id="-2"><a href="#-2" class="headerlink" title=""></a></h1>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2023-11-19T05:36:15.348Z" itemprop="datePublished">2023-11-19</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%AD%86%E8%A8%98/">工作筆記</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LIFF/" rel="tag">LIFF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LINE/" rel="tag">LINE</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-TeamsBot"
 class="article article-type-post"
 >
@@ -347,114 +476,6 @@ class="article article-type-post"
 
     
   
-    
-      <article
-id="post-docker-memo"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h1 id="CLI-登入"><a href="#CLI-登入" class="headerlink" title="CLI 登入"></a>CLI 登入</h1><p>先用網頁登入docker hub,到Security 新增Tocken<br><strong>要先記錄下密碼</strong><br>用取得的指令登入 ex: docker login -u anselchen</p>
-<p>若失敗</p>
-<pre><code>service docker stop
-rm ~/.docker/config.json
-service docker start
-</code></pre>
-<p>Try again!</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-04-12T09:22:40.000Z" itemprop="datePublished">2023-04-12</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-membersys"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，<br>主要路由會有 “&#x2F;index”, “&#x2F;login”, “&#x2F;register”, “&#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，<br>其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&#x2F;memberlist”就需要管理員身分才能進入，<br>否則便會返回登入頁面要求登入。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-04-07T05:50:29.000Z" itemprop="datePublished">2023-04-07</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
 
   
     <nav class="pagination">
@@ -488,7 +509,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Net/" rel="tag">.Net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bot/" rel="tag">Bot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphAPI/" rel="tag">GraphAPI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TeamsBot/" rel="tag">TeamsBot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Net/" rel="tag">.Net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bot/" rel="tag">Bot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flask/" rel="tag">Flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphAPI/" rel="tag">GraphAPI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LIFF/" rel="tag">LIFF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LINE/" rel="tag">LINE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mediapipe/" rel="tag">Mediapipe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful-API/" rel="tag">RESTful API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TeamsBot/" rel="tag">TeamsBot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yolo/" rel="tag">Yolo</a></li></ul>
     </div>
   </div>
 
@@ -499,6 +520,14 @@ class="article article-type-post"
     <div class="widget-title"><span>Recent Posts</span></div>
     <div class="widget-inner">
       <ul>
+        
+          <li>
+            <a href="/2024/01/12/PythonMemo/">python筆記</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/19/line-liff/">LINE-LIFF 使用說明</a>
+          </li>
         
           <li>
             <a href="/2023/09/17/TeamsBot/">[筆記]用IIS部署.NET TeamsBot</a>
@@ -512,14 +541,6 @@ class="article article-type-post"
             <a href="/2023/07/22/third-party-oauth/">[筆記]第三方OAuth SSO登入</a>
           </li>
         
-          <li>
-            <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -529,7 +550,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a></li></ul>
     </div>
   </div>
 
@@ -556,7 +577,7 @@ class="article article-type-post"
     <!-- 开源不易，请勿删除 -->
     <div class="footer-wrap">
         <div class="footer-inner"> 
-            Ansel&#39;s Blog &copy; 2023<br>
+            Ansel&#39;s Blog &copy; 2024<br>
             Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
         </div>
     </div>
