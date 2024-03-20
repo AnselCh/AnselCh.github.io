@@ -6,35 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     
-    <title>Ansel&#39;s Blog</title>
+    <title>[筆記]MSSQL JSON解析 | Ansel&#39;s Blog</title>
 
-    <meta name="description" content="Ansel&#39;s Blog">
+    <meta name="description" content="&lt;p&gt;OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：&lt;br&gt;從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&amp;#x2F;值組。&lt;br&gt;從 JSON 陣列，此函式會傳回所有陣列元素及其索引。&lt;/p&gt;">
     <meta name="keywords" content="">
 
     
 
-
-
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content=""/>
-    <meta property="og:description" content=""/>
     <meta property="og:locale" content="zh-tw" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://example.com/page/2/index.html" />
-    <meta property="og:site_name" content="Ansel Ch" />
+    <meta property="og:title" content= "[筆記]MSSQL JSON解析 | Ansel&#39;s Blog"  />
+    <meta property="og:description" content= "&lt;p&gt;OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：&lt;br&gt;從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&amp;#x2F;值組。&lt;br&gt;從 JSON 陣列，此函式會傳回所有陣列元素及其索引。&lt;/p&gt;" />
+    <meta property="og:url" content="http://example.com/2024/03/20/MSSQL/index.html" />
+    <meta property="og:site_name" content="" />
+    <meta property="article:author" content="Ansel Ch" />
     <meta property="article:publisher" content="" />
+    <meta property="og:description" content="&lt;p&gt;OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：&lt;br&gt;從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&amp;#x2F;值組。&lt;br&gt;從 JSON 陣列，此函式會傳回所有陣列元素及其索引。&lt;/p&gt;" />
+    <meta name="twitter:title" content="[筆記]MSSQL JSON解析 | Ansel&#39;s Blog"/>
+    <meta name="twitter:description" content="&lt;p&gt;OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：&lt;br&gt;從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&amp;#x2F;值組。&lt;br&gt;從 JSON 陣列，此函式會傳回所有陣列元素及其索引。&lt;/p&gt;"/>
     <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "",
-            "description": "",
+            "description": "&lt;p&gt;OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：&lt;br&gt;從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&amp;#x2F;值組。&lt;br&gt;從 JSON 陣列，此函式會傳回所有陣列元素及其索引。&lt;/p&gt;",
+            "author": { "@type": "Person", "name": "Ansel Ch" },
+            "@type": "BlogPosting",
+            "url": "http://example.com/2024/03/20/MSSQL/index.html",
             "publisher": {
-                "@type": "Organization",
-                "name": "Ansel Ch"
+            "@type": "Organization",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://example.com\images\AN_logo2.png"
             },
+            "name": "Ansel Ch"
+            },
+            "headline": "[筆記]MSSQL JSON解析 | Ansel&#39;s Blog",
+            "datePublished": "2024-03-20T15:27:43.000Z",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "http://example.com/2024/03/20/MSSQL/index.html"
+            },
+            "@context": "http://schema.org"
         }
     </script>
+
+
 
 
     
@@ -62,7 +76,7 @@
 
 
     <script>
-        window.isPost = false
+        window.isPost = true
         window.aomori = {
             
             
@@ -156,289 +170,148 @@
         <div class="main">
             <section class="inner">
                 <section class="inner-main">
-                    <div class="index">
-  
-    
-      <article
-id="post-docker-memo"
-class="article article-type-post"
->
+                    <div class="post">
+    <article id="post-cltzz0wjr000xmtrh9y2x0suc" class="article article-type-post" itemscope
+    itemprop="blogPost">
 
+    <div class="article-inner">
 
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/04/12/docker-memo/">[Docker] 練習筆記</a>
-    </header>
-    <div class="article-entry post-inner-html">
         
-        <h1 id="CLI-登入"><a href="#CLI-登入" class="headerlink" title="CLI 登入"></a>CLI 登入</h1><p>先用網頁登入docker hub,到Security 新增Tocken<br><strong>要先記錄下密碼</strong><br>用取得的指令登入 ex: docker login -u anselchen</p>
-<p>若失敗</p>
-<pre><code>service docker stop
-rm ~/.docker/config.json
-service docker start
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      [筆記]MSSQL JSON解析
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2024-03-20T15:27:43.000Z" itemprop="datePublished">2024-03-20</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSSQL/" rel="tag">MSSQL</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>OPENJSON 函數會接受單一 JSON 物件或 JSON 物件的集合，並將其轉換成一或多個資料列。 根據預設，OPENJSON 函式會傳回下列資料：<br>從 JSON 物件，此函式會傳回可在第一層找到的所有索引鍵&#x2F;值組。<br>從 JSON 陣列，此函式會傳回所有陣列元素及其索引。</p>
+<span id="more"></span>
+
+<p>當您使用 OPENJSON 函式而不提供明確的結果結構描述 (也就是在 OPENJSON 之後不使用 WITH 子句) 時，此函式會傳回包含下列三個資料行的資料表：<br>輸入物件中的屬性名稱 (或輸入陣列中元素的索引)。<br>屬性或陣列元素的值。<br>類型 (例如字串、數字、布林值、陣列或物件)。</p>
+<pre><code>DECLARE @members NVARCHAR(MAX) = &#39;[&#123;&quot;name&quot;: &quot;王大山&quot;, &quot;sex&quot;: &quot;male&quot;&#125;,&#123;&quot;name&quot;: &quot;李碩德&quot;, &quot;sex&quot;: &quot;male&quot;&#125;]&#39;
+ 
+SELECT * FROM OPENJSON(@members) WITH (name NVARCHAR(64),sex NVARCHAR(64)) as data
 </code></pre>
-<p>Try again!</p>
-        
-    </div>
-    </div>
+<p>當您使用 OPENJSON 函數的 WITH 子句指定結果的結構描述時，此函數會傳回只包含您在 WITH 子句中所定義之資料行的資料表。 在選擇性 WITH 子句中，您可以指定一組輸出資料行、其類型，以及每個輸出值的 JSON 來源屬性路徑。 OPENJSON 會逐一查看 JSON 物件的陣列、讀取為每個資料行指定之路徑上的值，並將值轉換成指定的型。</p>
+<pre><code>DECLARE @data NVARCHAR(MAX) = &#123;&#123;@N7173560739599355904&#125;&#125;;
+DECLARE @index INT = 0;
+DECLARE @ITEM_NUMBER NVARCHAR(64), @ITEM_DESCRIPTION NVARCHAR(64), @QUANTITY NVARCHAR(64), @UNIT_PRICE NVARCHAR(64), @NEED_BY_DATE NVARCHAR(64), @LINE_ID NVARCHAR(64), @DOCUMENT_LINE_NUM NVARCHAR(64), @CHANGE_FLAG NVARCHAR(64), @LAST_UNIT_PRICE NVARCHAR(64);
 
-    <div class="article-badge">
-        
-        
-    </div>
+WHILE @index &lt; (SELECT COUNT(*) FROM OPENJSON(@data))
+BEGIN
+    SELECT @ITEM_NUMBER = JSON_VALUE(value, &#39;$.ITEM_NUMBER&#39;),
+           @ITEM_DESCRIPTION = JSON_VALUE(value, &#39;$.ITEM_DESCRIPTION&#39;),
+           @QUANTITY = JSON_VALUE(value, &#39;$.QUANTITY&#39;),
+           @UNIT_PRICE = JSON_VALUE(value, &#39;$.UNIT_PRICE&#39;),
+           @NEED_BY_DATE = JSON_VALUE(value, &#39;$.NEED_BY_DATE&#39;),
+           @LINE_ID = JSON_VALUE(value, &#39;$.LINE_ID&#39;),
+           @DOCUMENT_LINE_NUM = JSON_VALUE(value, &#39;$.DOCUMENT_LINE_NUM&#39;),
+           @CHANGE_FLAG = JSON_VALUE(value, &#39;$.CHANGE_FLAG&#39;),
+           @LAST_UNIT_PRICE = JSON_VALUE(value, &#39;$.LAST_UNIT_PRICE&#39;)
+    FROM OPENJSON(@data)
+    WHERE [key] = @index;
 
-</div>
+    -- 在這裡使用 INSERT INTO 語句將資料插入目標表格
+    INSERT INTO FM7T_ORACLEPO_D(RequisitionID, ITEM_NUMBER, ITEM_DESCRIPTION, QUANTITY, UNIT_PRICE, NEED_BY_DATE, LINE_ID, DOCUMENT_LINE_NUM, CHANGE_FLAG, LAST_UNIT_PRICE)
+    VALUES(&#123;&#123;@N7173144044422434816.0.requisitionID&#125;&#125;, @ITEM_NUMBER, @ITEM_DESCRIPTION, @QUANTITY, @UNIT_PRICE, @NEED_BY_DATE, @LINE_ID, @DOCUMENT_LINE_NUM, @CHANGE_FLAG, @LAST_UNIT_PRICE);
 
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-04-12T09:22:40.000Z" itemprop="datePublished">2023-04-12</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
+    SET @index = @index + 1;
+END;
+</code></pre>
+
         </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WSL2/" rel="tag">WSL2</a></li></ul>
-        </div>
-    
+
     </div>
-</footer>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/2024/01/12/PythonMemo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">[筆記]python虛擬環境ARM To x86</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=[筆記]MSSQL JSON解析 - Ansel's Blog&url=http%3A%2F%2Fexample.com%2F2024%2F03%2F20%2FMSSQL%2F">
+            <ion-icon name="logo-twitter"></ion-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=[筆記]MSSQL JSON解析 - Ansel's Blog&u=http%3A%2F%2Fexample.com%2F2024%2F03%2F20%2FMSSQL%2F">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=[筆記]MSSQL JSON解析 - Ansel's Blog&url=http://example.com/2024/03/20/MSSQL/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
 
 </article>
 
-    
-  
-    
-      <article
-id="post-membersys"
-class="article article-type-post"
->
 
 
 
-<div class="article-inner">
-    
 
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/04/07/membersys/">[會員系統] 使用Flask建置會員系統路由，並串接API連接資料庫 </a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>這篇文章算是前一篇FAST API的延伸，上次只有串一個很簡略的html前端頁面，而這次比較認真的做了一系列的網頁串接每個API，<br>主要路由會有 “&#x2F;index”, “&#x2F;login”, “&#x2F;register”, “&#x2F;memberlist”，分別是首頁、登入、註冊跟會員清單，<br>其中除了登入及註冊頁面外，都需要用相對應的身分才能進入，像是 “&#x2F;memberlist”就需要管理員身分才能進入，<br>否則便會返回登入頁面要求登入。</p>
-        
-    </div>
-    </div>
 
-    <div class="article-badge">
-        
-        
-    </div>
+
+
+
+
+
+
+
+
+
 
 </div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-04-07T05:50:29.000Z" itemprop="datePublished">2023-04-07</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/tutorial/">tutorial</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atlas/" rel="tag">Atlas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-fastapi"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/03/15/fastapi/">[Fastapi] 快速製作一個會員後台API,並用ajax串接</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <meta name="referrer" content="no-referrer" />
-
-<p>今天要用python來開發API，至於什麼是RESTful API就不贅述，網路上都可以輕易找到!</p>
-<p>這次會使用Fastapi並連接MongoDB製作會員系統API，過程相當簡單!</p>
-<p>並在最後寫一個簡單的註冊頁面測試API。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-03-15T02:51:56.000Z" itemprop="datePublished">2023-03-15</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/repository/">repository</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fastapi/" rel="tag">Fastapi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-clockapp"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/03/06/clockapp/">[PyQt5] 做一個GUI介面的時鐘吧!</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <meta name="referrer" content="no-referrer" />
-
-<img src="./max.jpg" alt="max" style="display:block; margin:auto;"/>
-
-<p>專案地址:<a target="_blank" rel="noopener" href="https://github.com/AnselCh/widget_clock">https://github.com/AnselCh/widget_clock</a></p>
-<h1 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h1><p>做出一個可以自訂位子且能調整透明度的小時鐘。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-03-06T03:06:13.000Z" itemprop="datePublished">2023-03-06</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/repository/">repository</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyQt5/" rel="tag">PyQt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-yolov5-practice"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2023/03/01/yolov5-practice/">[Pytorch] 嘗試用Yolov5做車牌辨識</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <meta name="referrer" content="no-referrer" />
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="Yolov5是什麼"><a href="#Yolov5是什麼" class="headerlink" title="Yolov5是什麼?"></a>Yolov5是什麼?</h2><p> Yolov5是一種用於物件偵測的深度學習模型，它可以在圖像中找出並標記不同類別的物件。監督試學習是一種機器學習方法，它需要使用已經標註了正確答案的資料集來訓練模型。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5">Yolov5官網</a></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2023-03-01T03:26:55.000Z" itemprop="datePublished">2023-03-01</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/repository/">repository</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/" rel="tag">ML</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-
-  
-    <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next</a>
-    </nav>
-  
-</div>
-
                 </section>
             </section>
 
@@ -449,6 +322,12 @@ class="article article-type-post"
       <div class="widget" id="widget">
         
           
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
             
           
   <div class="widget-wrap widget-cate">
